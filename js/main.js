@@ -48,4 +48,28 @@
     }
     document.querySelectorAll('.thumbnails > li')[target].click();
   });
+
+  // 前へのボタン
+  const prev = document.getElementById('prev');
+  prev.addEventListener('click', () => {
+    let target = currentIndex - 1;
+    if (target < 0) {
+      target = images.length - 1;
+    }
+    document.querySelectorAll('.thumbnails > li')[target].click();
+  });
+
+  // スライドショーの時間設定
+  function playSlideshow() {
+    setTimeout(() =>{
+      next.click();
+      playSlideshow();
+    }, 1000);
+  }
+
+  // スライドショー
+  const play = document.getElementById('play');
+  play.addEventListener('click', () => {
+    playSlideshow();
+  });
 }
