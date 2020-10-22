@@ -59,17 +59,30 @@
     document.querySelectorAll('.thumbnails > li')[target].click();
   });
 
+  let timeoutId;
+
   // スライドショーの時間設定
   function playSlideshow() {
-    setTimeout(() =>{
+    timeoutId = setTimeout(() =>{
       next.click();
       playSlideshow();
     }, 1000);
   }
 
+  // デフォルト
+  let isPlaying = false;
+
   // スライドショー
   const play = document.getElementById('play');
   play.addEventListener('click', () => {
-    playSlideshow();
+    // デフォルトからクリックしたら
+    if (isPlaying === false) {
+      playSlideshow();
+      play.textContent = 'Pause';
+    } else {
+      clearTimeout(timeoutId);
+      play.textContent = 'Play';
+    }
+    isPlaying = !isPlaying;
   });
 }
